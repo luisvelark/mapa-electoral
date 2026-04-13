@@ -533,11 +533,41 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="border-t border-slate-700 mt-8 py-4 px-4 text-center">
-        <p className="text-xs text-slate-500">
-          Fuente: ONPE — Oficina Nacional de Procesos Electorales |{" "}
-          <span className="text-slate-400">resultadoelectoral.onpe.gob.pe</span>
-        </p>
+      <footer className="border-t border-slate-700 mt-8 py-6 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-slate-500 text-center sm:text-left">
+            Fuente: ONPE — Oficina Nacional de Procesos Electorales
+          </p>
+
+          <a
+            href="https://www.linkedin.com/in/luisvelark/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2.5 bg-slate-800 hover:bg-[#0A66C2] border border-slate-700 hover:border-[#0A66C2] rounded-lg px-4 py-2 transition-all duration-200 shrink-0"
+          >
+            {/* LinkedIn icon */}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-4 h-4 fill-[#0A66C2] group-hover:fill-white transition-colors shrink-0"
+            >
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+            <div className="text-left">
+              <p className="text-xs font-semibold text-slate-200 group-hover:text-white leading-tight transition-colors">
+                Luis Velasquez
+              </p>
+              <p className="text-xs text-slate-400 group-hover:text-blue-100 leading-tight transition-colors">
+                Conecta en LinkedIn
+              </p>
+            </div>
+            <svg
+              viewBox="0 0 24 24"
+              className="w-3 h-3 fill-slate-500 group-hover:fill-white group-hover:translate-x-0.5 transition-all shrink-0"
+            >
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </a>
+        </div>
       </footer>
     </div>
   );
