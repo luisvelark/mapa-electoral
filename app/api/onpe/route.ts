@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BASE_URL = "https://resultadoelectoral.onpe.gob.pe/presentacion-backend";
+
 const HEADERS = {
   accept: "*/*",
   "accept-language": "es-419,es;q=0.9",
@@ -11,16 +12,52 @@ const HEADERS = {
 };
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const path = searchParams.get("path") || "";
-  const query = searchParams.toString().replace(/^path=[^&]*&?/, "").replace(/&?path=[^&]*/, "");
-  const url = `${BASE_URL}/${path}${query ? "?" + query : ""}`;
-
   try {
-    const res = await fetch(url, { headers: HEADERS, next: { revalidate: 30 } });
+    const { searchParams } = new URL(req.url);
+
+    const path = searchParams.get("path") || "";
+
+    // 👉 construir body desde query params
+    const body: Record<string, any> = {};
+    searchParams.forEach((value, key) => {
+      if (key !== "path") {
+        body[key] = isNaN(Number(value)) ? value : Number(value);
+      }
+    });
+
+    const url = `${BASE_URL}/${path}`;
+
+    const res = await fetch(url, {
+      method: "POST", // 🔥 CAMBIO CLAVE
+      headers: HEADERS,
+      body: JSON.stringify(body),
+      next: { revalidate: 30 },
+    });
+
+    // 🔥 validar respuesta
+    if (!res.ok) {
+      const text = await res.text();
+      return NextResponse.json(
+        {
+          success: false,
+          status: res.status,
+          error: text,
+        },
+        { status: res.status }
+      );
+    }
+
     const data = await res.json();
+
     return NextResponse.json(data);
-  } catch {
-    return NextResponse.json({ success: false, message: "Error fetching data" }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Error interno",
+        error: String(error),
+      },
+      { status: 500 }
+    );
   }
 }
