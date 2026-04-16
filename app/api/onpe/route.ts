@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     const path = searchParams.get("path") || "";
 
     // 👉 construir body desde query params
-    const body: Record<string, any> = {};
+    const body: Record<string, string | number> = {};
     searchParams.forEach((value, key) => {
       if (key !== "path") {
         body[key] = isNaN(Number(value)) ? value : Number(value);

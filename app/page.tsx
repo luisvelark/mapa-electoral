@@ -169,7 +169,7 @@ export default function Home() {
     fetchOnpe("ubigeos/departamentos", {
       idEleccion: "10",
       idAmbitoGeografico: "1",
-    }).then((data: Department[]) => setDepartments(data));
+    }).then((data: Department[]) => setDepartments(data ?? []));
   }, []);
 
   // ── Carga inicial de todos los datos ────────────────────────────────────
